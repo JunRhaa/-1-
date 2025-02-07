@@ -1,23 +1,33 @@
 ﻿<Window x:Class="Практическая_работа_1_Писецкий_Полторабатько.MainWindow"
-       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Практическая работа 1" Height="400" Width="600">
-    <Grid>
-        <Image Name="FunctionImage" Source="screenshot.png" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+        Title="Практическая работа 1" Height="450" Width="800">
+    <Grid Margin="10">
+        <!-- Изображение функции -->
+        <Image Source="screenshot.png" Width="200" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="График выбранной функции" Margin="0,44,0,0"/>
 
-        <Label Content="Введите значение x:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,10,0,0"/>
-        <TextBox Name="InputTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,30,0,0" Width="100" ToolTip="Введите значение для x"/>
+        <!-- Текстовые поля для ввода данных -->
+        <Label Content="Введите x:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,20,0,0"/>
+        <TextBox Name="InputXTextBox" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,50,0,0" ToolTip="Введите значение x"/>
 
-        <Label Content="Результат:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,70,0,0"/>
-        <TextBox Name="ResultTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,90,0,0" Width="100" IsReadOnly="True" ToolTip="Результат вычислений"/>
+        <Label Content="Введите b:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,20,0,0"/>
+        <TextBox Name="InputBTextBox" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,50,0,0" ToolTip="Введите значение b"/>
 
-        <RadioButton Name="RadioButtonSh" Content="sh(x)" GroupName="FunctionGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,130,0,0" ToolTip="Гиперболический синус"/>
-        <RadioButton Name="RadioButtonX2" Content="x²" GroupName="FunctionGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,150,0,0" ToolTip="Квадрат числа"/>
-        <RadioButton Name="RadioButtonEx" Content="e^x" GroupName="FunctionGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,170,0,0" ToolTip="Экспоненциальная функция"/>
+        <!-- Выбор функции -->
+        <Label Content="Выберите функцию f(x):" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,90,0,0"/>
+        <RadioButton Name="RadioFunction1" Content="f(x) = sh(x)" IsChecked="True" GroupName="FunctionGroup" Margin="220,120,0,0" ToolTip="Гиперболический синус"/>
+        <RadioButton Name="RadioFunction2" Content="f(x) = x^2" GroupName="FunctionGroup" Margin="320,120,0,0" ToolTip="Квадрат числа"/>
+        <RadioButton Name="RadioFunction3" Content="f(x) = e^x" GroupName="FunctionGroup" Margin="420,120,0,0" ToolTip="Экспонента"/>
 
-        <Button Name="CalculateButton" Content="Вычислить" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,210,0,0" Width="100" Click="CalculateButton_Click" ToolTip="Запустить вычисление"/>
-        <Button Name="ClearButton" Content="Очистить" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,210,0,0" Width="100" Click="ClearButton_Click" ToolTip="Очистить поля ввода"/>
+        <!-- Кнопки действия -->
+        <Button Content="Вычислить" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,170,0,0" Click="CalculateButton_Click" ToolTip="Выполнить вычисление"/>
+        <Button Content="Очистить" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,170,0,0" Click="ClearButton_Click" ToolTip="Очистить поля"/>
 
-        <Button Name="ExitButton" Content="Выход" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,210,0,0" Width="100" Click="ExitButton_Click" ToolTip="Закрыть приложение"/>
+        <!-- Результат -->
+        <Label Content="Результат:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,220,0,0"/>
+        <TextBox Name="ResultTextBox" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,250,0,0" IsReadOnly="True" ToolTip="Значение функции"/>
+
+        <!-- Подтверждение выхода -->
+        <Button Content="Выход" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="ExitButton_Click" ToolTip="Выйти из приложения"/>
     </Grid>
 </Window>

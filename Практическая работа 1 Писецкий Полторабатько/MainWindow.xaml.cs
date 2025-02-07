@@ -15,60 +15,85 @@ using System.Windows.Shapes;
 
 namespace Практическая_работа_1_Писецкий_Полторабатько
 {
-public partial class MainWindow : Window
-{
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void CalculateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(InputXTextBox.Text) || string.IsNullOrEmpty(InputBTextBox.Text))
+            {
+                MessageBox.Show("Введите значения x и b!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!double.TryParse(InputXTextBox.Text, out double x) || !double.TryParse(InputBTextBox.Text, out double b))
+            {
+                MessageBox.Show("Неверный формат чисел!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            double f_x = 0;
+
+            if (RadioFunction1.IsChecked == true)
+            {
+                f_x = Math.Sinh(x); // f(x) = sh(x)
+            }
+            else if (RadioFunction2.IsChecked == true)
+            {
+                f_x = Math.Pow(x, 2); // f(x) = x^2
+            }
+            else if (RadioFunction3.IsChecked == true)
+            {
+                f_x = Math.Exp(x); // f(x) = e^x
+            }
+
+            double product = x * b;
+
+            double result;
+
+            if (product > 0.5 && product < 10)
+            {
+                double numerator = Math.Exp(f_x) - Math.Abs(b);
+                double denominator = Math.Sqrt(Math.Abs(f_x + b));
+
+                if (denominator == 0)
+                {
+                    MessageBox.Show("Деление на ноль невозможно! Измените значения.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                result = numerator / denominator;
+            }
+            else if (product > 0.1 && product < 0.5)
+            {
+                result = Math.Sqrt(Math.Abs(f_x + b));
+            }
+            else
+            {
+                result = 2 * Math.Pow(f_x, 2);
+            }
+
+            ResultTextBox.Text = result.ToString("F4"); // Вывод результата с 4 знаками после запятой
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            InputXTextBox.Clear();
+            InputBTextBox.Clear();
+            ResultTextBox.Clear();
+            RadioFunction1.IsChecked = true; // Сброс выбора функции на f(x) = sh(x)
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+        }
     }
-
-    private void CalculateButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(InputTextBox.Text) || !double.TryParse(InputTextBox.Text, out double x))
-        {
-            MessageBox.Show("Пожалуйста, введите корректное значение для x.", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
-        }
-
-        double result = 0;
-
-        if (RadioButtonSh.IsChecked == true)
-        {
-            result = Math.Sinh(x);
-        }
-        else if (RadioButtonX2.IsChecked == true)
-        {
-            result = Math.Pow(x, 2);
-        }
-        else if (RadioButtonEx.IsChecked == true)
-        {
-            result = Math.Exp(x);
-        }
-        else
-        {
-            MessageBox.Show("Пожалуйста, выберите функцию.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
-        }
-
-        ResultTextBox.Text = result.ToString();
-    }
-
-    private void ClearButton_Click(object sender, RoutedEventArgs e)
-    {
-        InputTextBox.Clear();
-        ResultTextBox.Clear();
-        RadioButtonSh.IsChecked = false;
-        RadioButtonX2.IsChecked = false;
-        RadioButtonEx.IsChecked = false;
-    }
-
-    private void ExitButton_Click(object sender, RoutedEventArgs e)
-    {
-        var result = MessageBox.Show("Вы уверены, что хотите выйти?", "Подтверждение выхода", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (result == MessageBoxResult.Yes)
-        {
-            Application.Current.Shutdown();
-        }
-    }
-}
 }
