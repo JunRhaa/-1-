@@ -40,15 +40,15 @@ namespace Практическая_работа_1_Писецкий_Полтор�
 
             if (RadioFunction1.IsChecked == true)
             {
-                f_x = Math.Sinh(x); // f(x) = sh(x)
+                f_x = Math.Sinh(x);
             }
             else if (RadioFunction2.IsChecked == true)
             {
-                f_x = Math.Pow(x, 2); // f(x) = x^2
+                f_x = Math.Pow(x, 2);
             }
             else if (RadioFunction3.IsChecked == true)
             {
-                f_x = Math.Exp(x); // f(x) = e^x
+                f_x = Math.Exp(x);
             }
 
             double product = x * b;
@@ -77,7 +77,7 @@ namespace Практическая_работа_1_Писецкий_Полтор�
                 result = 2 * Math.Pow(f_x, 2);
             }
 
-            ResultTextBox.Text = result.ToString("F4"); // Вывод результата с 4 знаками после запятой
+            ResultTextBox.Text = result.ToString("F4");
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -85,7 +85,7 @@ namespace Практическая_работа_1_Писецкий_Полтор�
             InputXTextBox.Clear();
             InputBTextBox.Clear();
             ResultTextBox.Clear();
-            RadioFunction1.IsChecked = true; // Сброс выбора функции на f(x) = sh(x)
+            RadioFunction1.IsChecked = true;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
